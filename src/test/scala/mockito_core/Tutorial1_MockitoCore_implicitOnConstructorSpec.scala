@@ -1,4 +1,4 @@
-package mockito
+package mockito_core
 
 import java.util.UUID
 
@@ -8,12 +8,9 @@ import org.scalatest.FeatureSpec
 import io.circe.Decoder.Result
 import io.circe.{Decoder, Json, ParsingFailure}
 
-/**
-  * This suite pass.
-  */
-class MockitoTutorial1_implicitOnConstructorSpec extends FeatureSpec {
+class Tutorial1_MockitoCore_implicitOnConstructorSpec extends FeatureSpec {
 
-  import MockitoTutorial1_implicitOnConstructorSpec._
+  import Tutorial1_MockitoCore_implicitOnConstructorSpec._
 
   feature("Mock") {
     scenario("Mock on MyClassB without implicit") {
@@ -54,7 +51,7 @@ class MockitoTutorial1_implicitOnConstructorSpec extends FeatureSpec {
 }
 
 
-object MockitoTutorial1_implicitOnConstructorSpec {
+object Tutorial1_MockitoCore_implicitOnConstructorSpec {
 
   // MyClassB : simple
   class MyClassB {

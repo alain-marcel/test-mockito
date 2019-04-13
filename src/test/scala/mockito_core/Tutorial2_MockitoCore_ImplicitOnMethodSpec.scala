@@ -8,12 +8,9 @@ import io.circe.generic.auto._
 import io.circe.Decoder.Result
 import io.circe.{Decoder, HCursor, Json, ParsingFailure}
 
-/**
-  * This suite does not pass.
-  */
-class MockitoTutorial2_ImplicitOnMethodSpec extends FeatureSpec {
+class Tutorial2_MockitoCore_ImplicitOnMethodSpec extends FeatureSpec {
 
-  import MockitoTutorial2_ImplicitOnMethodSpec._
+  import Tutorial2_MockitoCore_ImplicitOnMethodSpec._
 
   feature("Mock with implicit on method") {
     scenario("Mock on MyClassB") {
@@ -25,21 +22,18 @@ class MockitoTutorial2_ImplicitOnMethodSpec extends FeatureSpec {
     val uuid = UUID.randomUUID
     val mockClassB = MockitoSugar.mock[MyClassB[Person]]
 
-    // All three alternatives generate an error
-//    DDMockito.given(mockClassB.fb(ArgumentMatchers.any())).willReturn(None)
-//    BDDMockito.given(mockClassB.fb(ArgumentMatchers.any())(ArgumentMatchers.any())).willReturn(None)
-    BDDMockito.given(mockClassB.fb(ArgumentMatchers.any())(Person_JsonDecoder.decode_Person)).willReturn(None)
+    BDDMockito.given(mockClassB.fb(ArgumentMatchers.any())(ArgumentMatchers.any())).willReturn(None)
 
     val myClassA = new MyClassA(mockClassB)
     assert(myClassA.getPerson(uuid).isEmpty)
 
-    Mockito.verify(mockClassB).fb(uuid)
+    Mockito.verify(mockClassB).fb(ArgumentMatchers.eq(uuid))(ArgumentMatchers.any())
     Mockito.verifyNoMoreInteractions(mockClassB)
   }
 }
 
 
-object MockitoTutorial2_ImplicitOnMethodSpec {
+object Tutorial2_MockitoCore_ImplicitOnMethodSpec {
 
   val bobUuid: UUID = UUID.fromString("95ee37a4-44bb-4768-b2fb-d4d84b196e0d")
 
