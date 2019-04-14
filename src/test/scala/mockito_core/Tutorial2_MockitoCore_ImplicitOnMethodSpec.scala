@@ -1,4 +1,4 @@
-package mockito
+package mockito_core
 
 import java.util.UUID
 
@@ -12,15 +12,15 @@ class Tutorial2_MockitoCore_ImplicitOnMethodSpec extends FeatureSpec {
 
   import Tutorial2_MockitoCore_ImplicitOnMethodSpec._
 
-  feature("Mock with implicit on method") {
-    scenario("Mock on MyClassB") {
-      test_mockOnMyClassB()
+  feature("Mock a method with implicit") {
+    scenario("Nominal") {
+      test()
     }
   }
 
-  def test_mockOnMyClassB(): Unit = {
+  def test(): Unit = {
     val uuid = UUID.randomUUID
-    val mockClassB = MockitoSugar.mock[MyClassB[Person]]
+    val mockClassB = MockitoSugar.mock[MyClass[Person]]
 
     BDDMockito.given(mockClassB.fb(ArgumentMatchers.any())(ArgumentMatchers.any())).willReturn(None)
 
@@ -55,7 +55,7 @@ object Tutorial2_MockitoCore_ImplicitOnMethodSpec {
   object Person_JsonDecoder extends Person_JsonDecoder
 
 
-  class MyClassB[T] {
+  class MyClass[T] {
     def fb(uuid: UUID)(implicit decoder: Decoder[T]): Option[T] = {
       uuid match {
         case `bobUuid` =>
@@ -67,7 +67,7 @@ object Tutorial2_MockitoCore_ImplicitOnMethodSpec {
     }
   }
 
-  class MyClassA(val myClassB: MyClassB[Person])(implicit decoder: Decoder[Person]) {
+  class MyClassA(val myClassB: MyClass[Person])(implicit decoder: Decoder[Person]) {
     def getPerson(uuid: UUID): Option[Person] = {
       this.myClassB.fb(uuid)
     }

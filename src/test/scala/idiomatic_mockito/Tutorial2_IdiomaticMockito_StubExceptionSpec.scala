@@ -1,11 +1,10 @@
 package idiomatic_mockito
 
-import org.mockito.IdiomaticMockito
+import org.mockito.IdiomaticMockito._
 import org.scalatest.FeatureSpec
 
 class Tutorial2_IdiomaticMockito_StubExceptionSpec
-  extends FeatureSpec
-    with IdiomaticMockito {
+  extends FeatureSpec {
 
   import Tutorial2_IdiomaticMockito_StubExceptionSpec._
 
@@ -20,7 +19,7 @@ class Tutorial2_IdiomaticMockito_StubExceptionSpec
   }
 
   def test_RuntimeException(): Unit = {
-    val myMock: MyClass = IdiomaticMockito.mock[MyClass]
+    val myMock: MyClass = mock[MyClass]
 
     // Stub with RuntimeException
     myMock.bar().shouldThrow(new RuntimeException)
@@ -31,7 +30,7 @@ class Tutorial2_IdiomaticMockito_StubExceptionSpec
   }
 
   def test_Exception(): Unit = {
-    val myMock: MyClass = IdiomaticMockito.mock[MyClass]
+    val myMock: MyClass = mock[MyClass]
 
     // Stub with Exception
     myMock.bar().shouldThrow(new Exception)

@@ -1,16 +1,16 @@
 package idiomatic_mockito
 
-import org.mockito.integrations.scalatest.IdiomaticMockitoFixture
+import org.mockito.ArgumentMatchersSugar._
+import org.mockito.IdiomaticMockito._
 import org.scalatest.FeatureSpec
 
 class Tutorial1_IdiomaticMockito_BasicStubSpec
-  extends FeatureSpec
-    with IdiomaticMockitoFixture {
+  extends FeatureSpec {
 
   import Tutorial1_IdiomaticMockito_BasicStubSpec._
 
   feature("Stub with asterisk") {
-    scenario("shouldReturn") {
+    scenario("Use shouldReturn") {
       test_asterisk()
     }
   }
