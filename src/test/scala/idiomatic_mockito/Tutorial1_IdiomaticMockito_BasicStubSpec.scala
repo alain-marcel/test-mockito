@@ -9,8 +9,8 @@ class Tutorial1_IdiomaticMockito_BasicStubSpec
 
   import Tutorial1_IdiomaticMockito_BasicStubSpec._
 
-  feature("Stub") {
-    scenario("Use *") {
+  feature("Stub with asterisk") {
+    scenario("shouldReturn") {
       test_asterisk()
     }
   }
