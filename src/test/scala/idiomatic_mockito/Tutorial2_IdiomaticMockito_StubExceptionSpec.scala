@@ -3,11 +3,11 @@ package idiomatic_mockito
 import org.mockito.IdiomaticMockito
 import org.scalatest.FeatureSpec
 
-class Tutorial1_IdiomaticMockito_ExceptionSpec
+class Tutorial2_IdiomaticMockito_StubExceptionSpec
   extends FeatureSpec
     with IdiomaticMockito {
 
-  import Tutorial1_IdiomaticMockito_ExceptionSpec._
+  import Tutorial2_IdiomaticMockito_StubExceptionSpec._
 
   feature("Stub with Exception") {
     scenario("Stub with RuntimeException") {
@@ -22,28 +22,32 @@ class Tutorial1_IdiomaticMockito_ExceptionSpec
   def test_RuntimeException(): Unit = {
     val myMock: MyClass = IdiomaticMockito.mock[MyClass]
 
-    // Stubbing with RuntimeException is working fine
+    // Stub with RuntimeException
     myMock.bar().shouldThrow(new RuntimeException)
+
+    assertThrows[RuntimeException] {
+      myMock.bar()
+    }
   }
 
   def test_Exception(): Unit = {
     val myMock: MyClass = IdiomaticMockito.mock[MyClass]
 
-    // Stubbing with Exception: does not work : we have follwing excation
-    //   Checked exception is invalid for this method!
-    //     Invalid: java.lang.Exception
-    //   org.mockito.exceptions.base.MockitoException:
-    //     Checked exception is invalid for this method!
-    //     Invalid: java.lang.Exception
+    // Stub with Exception
     myMock.bar().shouldThrow(new Exception)
+
+    assertThrows[Exception] {
+      myMock.bar()
+    }
   }
 }
 
-object Tutorial1_IdiomaticMockito_ExceptionSpec {
+object Tutorial2_IdiomaticMockito_StubExceptionSpec {
 
   class MyClass {
     def bar(): String = {
       "foo"
     }
   }
+
 }

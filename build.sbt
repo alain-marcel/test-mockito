@@ -9,6 +9,6 @@ allDependencies ++= Seq(
   "io.circe" % "circe-generic_2.12" % "0.11.1",
   "io.circe" % "circe-parser_2.12" % "0.11.1",
   "io.circe" % "circe-java8_2.12" % "0.11.1",
-  "org.mockito" %% "mockito-scala" % "1.3.1",
+  "org.mockito" %% "mockito-scala" % "1.4.0-beta.4",
   "org.scalatest" %% "scalatest" % "3.0.4" % "test"
 )
